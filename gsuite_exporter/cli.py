@@ -70,7 +70,7 @@ def sync_all(
             start_time = None
         else:
             print(last_ts)
-            print(timedelta(minutes=offset)).isoformat())
+            print(timedelta(minutes=offset)).isoformat()
             start_time = (parser.parse(last_ts) - timedelta(minutes=offset)).isoformat()
         exporter_dest = exporter.get_destination(app)
         logger.info(
