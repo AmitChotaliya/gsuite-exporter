@@ -93,7 +93,6 @@ class StackdriverExporter(BaseExporter):
         """Last log timestamp from Stackdriver Logging API given our project id
         and log name.
         """
-        print(log_name)
         destination = self.get_destination(log_name)
         query = {
             'orderBy': 'timestamp desc',
@@ -101,14 +100,11 @@ class StackdriverExporter(BaseExporter):
             'resourceNames': [self.project_id],
             'filter': 'logName={}'.format(destination)
         }
-        print(query)
         log = self.api.entries().list(body=query).execute()
-        print(log)
         try:
             timestamp = log['entries'][0]['timestamp']
         except (KeyError, IndexError):
             timestamp = None
-        print(timestamp)
         return timestamp
 
     def __convert(self, record):
